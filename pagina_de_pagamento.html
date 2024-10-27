@@ -1,0 +1,164 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilos para o popup */
+        #plan-popup {
+            display: none;
+        }
+
+        #plan-popup.show {
+            display: flex; /* Para centralizar o popup */
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-200 to-blue-800 h-screen flex">
+        <!-- Sidebar -->
+    <div class="w-1/4 bg-black text-white p-6 flex flex-col justify-between">
+        <div>
+            <div class="flex items-center mb-6">
+                <i class="fas fa-tree text-2xl mr-2"></i>
+                <span class="text-xl font-semibold">Sr. Ambiente</span>
+                <i class="fas fa-ellipsis-h ml-auto"></i>
+            </div>
+            <button class="bg-green-600 text-white py-2 px-4 rounded flex items-center mb-6">
+                <i class="fas fa-plus mr-2"></i> Iniciar uma nova Conversa
+            </button>
+            <div class="relative mb-6">
+                <input type="text" placeholder="Procurar" class="w-full bg-gray-800 text-white py-2 px-4 rounded">
+                <i class="fas fa-search absolute right-4 top-3 text-gray-400"></i>
+            </div>
+            <div class="mb-6">
+                <h2 class="text-gray-400 mb-2">Category</h2>
+                <ul>
+                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                        <span>Efeito Estufa</span>
+                        <i class="fas fa-folder text-gray-400"></i>
+                    </li>
+                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                        <span>Poluição Ambiental</span>
+                        <i class="fas fa-folder text-gray-400"></i>
+                    </li>
+                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                        <span>Mudanças Climáticas</span>
+                        <i class="fas fa-folder text-gray-400"></i>
+                    </li>
+                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                        <span>Desenvolvimento Sustentável</span>
+                        <i class="fas fa-folder text-gray-400"></i>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <h2 class="text-gray-400 mb-2">Últimas Conversas</h2>
+                <ul>
+                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                        <span>Porque a eles não apagam</span>
+                        <i class="fas fa-comment text-gray-400"></i>
+                    </li>
+                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                        <span>Quais são as principais ca...</span>
+                        <i class="fas fa-comment text-gray-400"></i>
+                    </li>
+                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                        <span>O Lula é o culpado pelas qu...</span>
+                        <i class="fas fa-comment text-gray-400"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="flex items-center">
+            <i class="fas fa-user-circle text-2xl mr-2"></i>
+            <span>Perfil do Usuário</span>
+            <i class="fas fa-cog ml-auto"></i>
+        </div>
+    </div>
+    <!-- Main Content -->
+    <div class="w-3/4 p-10 bg-transparent">
+        <div class="flex justify-end mb-6">
+            <div id="currentPlan" class="bg-white text-black py-2 px-4 rounded">Plano Pro</div>
+            <button id="changePlanBtn" class="bg-blue-500 text-white py-2 px-4 rounded">Trocar Plano</button>
+        </div>
+        <div class="text-center mb-10">
+            <i class="fas fa-tree text-4xl mb-4"></i>
+            <h1 class="text-4xl font-semibold mb-4">Faça pergunta sobre questões ambientais</h1>
+            <p class="text-lg text-gray-200">Obtenha insights especializados sobre meio ambiente com nosso chatbot de IA. Pergunte sobre sustentabilidade, mudanças climáticas, biodiversidade e receba dicas ecológicas de forma simples e interativa.</p>
+        </div>
+        <div class="grid grid-cols-4 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h2 class="text-xl font-semibold mb-2">Efeito Estufa</h2>
+                <p class="text-gray-600 mb-4">Quer aprender sobre o Efeito Estufa e seus impactos no meio ambiente?</p>
+                <i class="fas fa-arrow-right text-gray-400"></i>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h2 class="text-xl font-semibold mb-2">Poluição Ambiental</h2>
+                <p class="text-gray-600 mb-4">Quer aprender sobre a Poluição Ambiental e seus impactos no meio ambiente?</p>
+                <i class="fas fa-arrow-right text-gray-400"></i>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h2 class="text-xl font-semibold mb-2">Mudanças Climáticas</h2>
+                <p class="text-gray-600 mb-4">Quer aprender sobre as Mudanças Climáticas e seus impactos no meio ambiente?</p>
+                <i class="fas fa-arrow-right text-gray-400"></i>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h2 class="text-xl font-semibold mb-2">Desenvolvimento Sustentável</h2>
+                <p class="text-gray-600 mb-4">Quer aprender sobre o Desenvolvimento Sustentável e seus impactos no meio ambiente?</p>
+                <i class="fas fa-arrow-right text-gray-400"></i>
+            </div>
+        </div>
+        <div class="fixed bottom-0 left-1/4 right-0 bg-gray-800 p-4 flex items-center">
+            <i class="fas fa-paperclip text-white text-2xl mr-4"></i>
+            <input type="text" placeholder="Faça a sua pergunta aqui ..." class="w-full bg-gray-700 text-white py-2 px-4 rounded">
+            <i class="fas fa-microphone text-white text-2xl ml-4"></i>
+            <i class="fas fa-paper-plane text-white text-2xl ml-4"></i>
+        </div>
+        <!-- Popup para troca de plano -->
+        <div id="plan-popup" class="hidden fixed top-0 left-0 right-0 bottom-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+                <h2 class="text-xl font-semibold mb-2">Trocar de Plano</h2>
+                <p class="text-gray-600 mb-4">Escolha o plano que deseja usar:</p>
+                <button id="freePlanConfirmBtn" class="bg-black text-white py-2 px-4 rounded-l-full">Plano Gratuito</button>
+                <button id="proPlanConfirmBtn" class="bg-gray-600 text-white py-2 px-4 rounded-r-full">Plano Pro R$10</button>
+                <button id="close-popup" class="bg-gray-800 text-white py-2 px-4 rounded-full absolute top-4 right-4">Fechar</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Evento para abrir o popup ao clicar no botão "Trocar Plano"
+        document.getElementById("changePlanBtn").addEventListener("click", function() {
+            document.getElementById("plan-popup").classList.add("show");
+        });
+
+        // Evento para fechar o popup
+        document.getElementById("close-popup").addEventListener("click", function() {
+            document.getElementById("plan-popup").classList.remove("show");
+        });
+
+        // Evento para trocar para o plano gratuito
+        document.getElementById("freePlanConfirmBtn").addEventListener("click", function() {
+            let confirmation = confirm("Você deseja mudar para o Plano gratuito?");
+            if (confirmation) {
+                // Atualiza a caixa de plano atual
+                document.getElementById("currentPlan").textContent = "Plano Gratuito";
+                // Redireciona para uma página de pagamento ou atualiza o plano
+                window.location.href = "index.html"; // Substitua com o link correto
+            }
+            document.getElementById("plan-popup").classList.remove("show");
+        });
+
+        // Evento para trocar para o plano Pro (pode ser adaptado conforme necessário)
+        document.getElementById("proPlanConfirmBtn").addEventListener("click", function() {
+            alert("Você já está no Plano Pro!");
+            document.getElementById("plan-popup").classList.remove("show");
+        });
+    </script>
+</body>
+</html>
