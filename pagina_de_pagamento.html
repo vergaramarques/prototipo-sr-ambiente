@@ -18,18 +18,49 @@
         #plan-popup.show {
             display: flex; /* Para centralizar o popup */
         }
+
+        /* Estilo para as mensagens */
+        .chat-container {
+            overflow-y: auto;
+            margin-bottom: 60px; /* Para não sobrepor a barra de entrada */
+            flex-grow: 1; /* Faz o contêiner crescer para ocupar o espaço disponível */
+        }
+
+        .message {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 5px 0;
+            max-width: 70%;
+            display: flex;
+            align-items: center; 
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #d1fae5; /* Verde claro para mensagens do usuário */
+            margin-left: auto; /* Alinha à direita */
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: #e5e7eb; /* Cinza claro para mensagens do bot */
+            margin-right: auto; /* Alinha à esquerda */
+        }
+        .message i {
+            margin-right: 10px; /* Espaço entre o ícone e o texto */
+        }
     </style>
 </head>
 <body class="bg-gradient-to-r from-blue-200 to-blue-800 h-screen flex">
-        <!-- Sidebar -->
-    <div class="w-1/4 bg-black text-white p-6 flex flex-col justify-between">
+    <!-- Sidebar -->
+    <div class="w-full md:w-1/4 bg-black text-white p-6 flex flex-col justify-between">
         <div>
             <div class="flex items-center mb-6">
                 <i class="fas fa-tree text-2xl mr-2"></i>
                 <span class="text-xl font-semibold">Sr. Ambiente</span>
-                <i class="fas fa-ellipsis-h ml-auto"></i>
             </div>
-            <button class="bg-green-600 text-white py-2 px-4 rounded flex items-center mb-6">
+            <button class="bg-green-600 text-white py-2 px-4 rounded flex items-center mb-6" id="start-new-conversation-btn">
                 <i class="fas fa-plus mr-2"></i> Iniciar uma nova Conversa
             </button>
             <div class="relative mb-6">
@@ -39,86 +70,103 @@
             <div class="mb-6">
                 <h2 class="text-gray-400 mb-2">Category</h2>
                 <ul>
-                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                    <a href="telaartigoestufa.html" class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
                         <span>Efeito Estufa</span>
                         <i class="fas fa-folder text-gray-400"></i>
-                    </li>
-                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                    </a>
+                    <a href="telaartigopoluicao.html" class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
                         <span>Poluição Ambiental</span>
                         <i class="fas fa-folder text-gray-400"></i>
-                    </li>
-                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                    </a>
+                    <a href="telaartigomudancas.html" class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
                         <span>Mudanças Climáticas</span>
                         <i class="fas fa-folder text-gray-400"></i>
-                    </li>
-                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                    </a>
+                    <a href="telaartigodesenvolvimento.html" class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
                         <span>Desenvolvimento Sustentável</span>
                         <i class="fas fa-folder text-gray-400"></i>
-                    </li>
+                    </a>
                 </ul>
             </div>
-            <div>
+            <div class="mb-6" id="last-conversations">
                 <h2 class="text-gray-400 mb-2">Últimas Conversas</h2>
-                <ul>
+                <ul id="conversations-list">
                     <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
-                        <span>Porque a eles não apagam</span>
-                        <i class="fas fa-comment text-gray-400"></i>
+                        <button id="preserve-amazonia" class="text-left w-full bg-transparent text-gray-200 hover:bg-gray-700 rounded">
+                            Quais os desafios para preservar a Amazônia?
+                        </button>
                     </li>
                     <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
-                        <span>Quais são as principais ca...</span>
-                        <i class="fas fa-comment text-gray-400"></i>
+                        <button id="desmatamento-biodiversidade" class="text-left w-full bg-transparent text-gray-200 hover:bg-gray-700 rounded">
+                            Como o desmatamento impacta a biodiversidade?
+                        </button>
                     </li>
                     <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
-                        <span>O Lula é o culpado pelas qu...</span>
-                        <i class="fas fa-comment text-gray-400"></i>
+                        <button id="lula-queimadas" class="text-left w-full bg-transparent text-gray-200 hover:bg-gray-700 rounded">
+                            O Lula é o culpado pelas queimadas?
+                        </button>
                     </li>
                 </ul>
             </div>
         </div>
         <div class="flex items-center">
-            <i class="fas fa-user-circle text-2xl mr-2"></i>
-            <span>Perfil do Usuário</span>
-            <i class="fas fa-cog ml-auto"></i>
+            <button onclick="window.location.href='perfilusuario.html'" class="flex items-center bg-transparent border-none">
+                <i class="fas fa-user-circle text-2xl mr-2"></i>
+                <span>Perfil do Usuário</span>
+            </button>
+            <button onclick="window.location.href='configuracoes.html'" class="ml-auto bg-transparent border-none">
+                <i class="fas fa-cog text-2xl"></i>
+            </button>
         </div>
     </div>
     <!-- Main Content -->
-    <div class="w-3/4 p-10 bg-transparent">
+    <div class="w-full md:w-3/4 p-6 bg-blue-300 flex flex-col">
         <div class="flex justify-end mb-6">
             <div id="currentPlan" class="bg-white text-black py-2 px-4 rounded">Plano Pro</div>
             <button id="changePlanBtn" class="bg-blue-500 text-white py-2 px-4 rounded">Trocar Plano</button>
         </div>
-        <div class="text-center mb-10">
-            <i class="fas fa-tree text-4xl mb-4"></i>
-            <h1 class="text-4xl font-semibold mb-4">Faça pergunta sobre questões ambientais</h1>
-            <p class="text-lg text-gray-200">Obtenha insights especializados sobre meio ambiente com nosso chatbot de IA. Pergunte sobre sustentabilidade, mudanças climáticas, biodiversidade e receba dicas ecológicas de forma simples e interativa.</p>
-        </div>
-        <div class="grid grid-cols-4 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <h2 class="text-xl font-semibold mb-2">Efeito Estufa</h2>
-                <p class="text-gray-600 mb-4">Quer aprender sobre o Efeito Estufa e seus impactos no meio ambiente?</p>
-                <i class="fas fa-arrow-right text-gray-400"></i>
+        <div id="info-container">
+            <div class="text-center mb-10">
+                <i class="fas fa-tree text-4xl mb-4"></i>
+                <h1 class="text-4xl font-semibold mb-4">Faça pergunta sobre questões ambientais</h1>
+                <p class="text-lg text-white">Obtenha insights especializados sobre meio ambiente com nosso chatbot de IA. Pergunte sobre sustentabilidade, mudanças climáticas, biodiversidade e receba dicas ecológicas de forma simples e interativa.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <h2 class="text-xl font-semibold mb-2">Poluição Ambiental</h2>
-                <p class="text-gray-600 mb-4">Quer aprender sobre a Poluição Ambiental e seus impactos no meio ambiente?</p>
-                <i class="fas fa-arrow-right text-gray-400"></i>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <h2 class="text-xl font-semibold mb-2">Mudanças Climáticas</h2>
-                <p class="text-gray-600 mb-4">Quer aprender sobre as Mudanças Climáticas e seus impactos no meio ambiente?</p>
-                <i class="fas fa-arrow-right text-gray-400"></i>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                <h2 class="text-xl font-semibold mb-2">Desenvolvimento Sustentável</h2>
-                <p class="text-gray-600 mb-4">Quer aprender sobre o Desenvolvimento Sustentável e seus impactos no meio ambiente?</p>
-                <i class="fas fa-arrow-right text-gray-400"></i>
+            <div class="grid grid-cols-4 gap-6">
+                <a href="telaartigoestufa.html" class="bg-white p-6 rounded-lg shadow-lg text-center block">
+                    <h2 class="text-xl font-semibold mb-2">Efeito Estufa</h2>
+                    <p class="text-gray-600 mb-4">Quer aprender sobre o Efeito Estufa e seus impactos no meio ambiente?</p>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                </a>
+                <a href="telaartigopoluicao.html" class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <h2 class="text-xl font-semibold mb-2">Poluição Ambiental</h2>
+                    <p class="text-gray-600 mb-4">Quer aprender sobre a Poluição Ambiental e seus impactos no meio ambiente?</p>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                </a>
+                <a href="telaartigomudancas.html" class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <h2 class="text-xl font-semibold mb-2">Mudanças Climáticas</h2>
+                    <p class="text-gray-600 mb-4">Quer aprender sobre as Mudanças Climáticas e seus impactos no meio ambiente?</p>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                </a>
+                <a href="telaartigodesenvolvimento.html" class="bg-white p-6 rounded-lg shadow-lg text-center">
+                    <h2 class="text-xl font-semibold mb-2">Desenvolvimento Sustentável</h2>
+                    <p class="text-gray-600 mb-4">Quer aprender sobre o Desenvolvimento Sustentável e seus impactos no meio ambiente?</p>
+                    <i class="fas fa-arrow-right text-gray-400"></i>
+                </a>
             </div>
         </div>
         <div class="fixed bottom-0 left-1/4 right-0 bg-gray-800 p-4 flex items-center">
-            <i class="fas fa-paperclip text-white text-2xl mr-4"></i>
-            <input type="text" placeholder="Faça a sua pergunta aqui ..." class="w-full bg-gray-700 text-white py-2 px-4 rounded">
-            <i class="fas fa-microphone text-white text-2xl ml-4"></i>
-            <i class="fas fa-paper-plane text-white text-2xl ml-4"></i>
+            <input type="file" id="file-input" class="hidden" />
+            <button id="attach-file-btn" class="bg-transparent text-white text-2xl mr-4" title="Anexar Arquivo">
+                <i class="fas fa-paperclip"></i>
+            </button>
+            <input type="text" id="chat-input" placeholder="Faça a sua pergunta aqui ..." class="w-full bg-gray-700 text-white py-2 px-4 rounded">
+            <i class="fas fa-paper-plane text-white text-2xl ml-4" id="send-btn"></i>
+            <button id="clear-chat-btn" class="bg-red-500 text-white py-1 px-2 rounded text-sm ml-4">
+                Limpar Chat
+            </button>
+        </div>
+        <div class="chat-container">
+            <!-- Mensagens serão adicionadas aqui -->
         </div>
         <!-- Popup para troca de plano -->
         <div id="plan-popup" class="hidden fixed top-0 left-0 right-0 bottom-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
@@ -144,7 +192,7 @@
 
         // Evento para trocar para o plano gratuito
         document.getElementById("freePlanConfirmBtn").addEventListener("click", function() {
-            let confirmation = confirm("Você deseja mudar para o Plano gratuito?");
+            let confirmation = confirm("Você deseja mudar para o Plano Gratuito?");
             if (confirmation) {
                 // Atualiza a caixa de plano atual
                 document.getElementById("currentPlan").textContent = "Plano Gratuito";
@@ -158,6 +206,86 @@
         document.getElementById("proPlanConfirmBtn").addEventListener("click", function() {
             alert("Você já está no Plano Pro!");
             document.getElementById("plan-popup").classList.remove("show");
+        });
+
+        // Função para enviar a mensagem
+        function sendMessage(message) {
+            let userInput = message || document.getElementById("chat-input").value;
+            if (userInput.trim() !== "") {
+                // Adiciona mensagem do usuário
+                let userMessage = document.createElement("div");
+                userMessage.className = "message user-message";
+                userMessage.innerHTML = `<i class="fas fa-user-circle text-xl"></i>${userInput}`; // Adiciona ícone do usuário
+                document.querySelector(".chat-container").appendChild(userMessage);
+
+                // Limpa a entrada de texto se a mensagem foi enviada pelo input
+                if (!message) {
+                    document.getElementById("chat-input").value = "";
+                }
+
+                // Responde com uma mensagem do bot
+                let botResponse = "Olá! Estou aqui para ajudar.";
+                let botMessage = document.createElement("div");
+                botMessage.className = "message bot-message";
+                botMessage.innerHTML = `<i class="fas fa-tree text-xl"></i>${botResponse}`; // Adiciona ícone do bot
+                document.querySelector(".chat-container").appendChild(botMessage);
+            }
+        }
+
+        // Adicionando eventos de clique para as mensagens da lista
+        document.getElementById("preserve-amazonia").addEventListener("click", function() {
+            sendMessage("Quais os desafios para preservar a Amazônia?");
+            document.getElementById('info-container').style.display = 'none';
+        });
+
+        document.getElementById("desmatamento-biodiversidade").addEventListener("click", function() {
+            sendMessage("Como o desmatamento impacta a biodiversidade?");
+            document.getElementById('info-container').style.display = 'none';
+        });
+
+        document.getElementById("lula-queimadas").addEventListener("click", function() {
+            sendMessage("O Lula é o culpado pelas queimadas?");
+            document.getElementById('info-container').style.display = 'none';
+        });
+
+        // Evento para enviar mensagem quando pressionar Enter
+        document.getElementById("chat-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+                document.getElementById('info-container').style.display = 'none';
+            }
+        });
+
+        // Evento para enviar mensagem ao clicar no botão de enviar
+        document.getElementById("send-btn").addEventListener("click", function() {
+            sendMessage();
+            document.getElementById('info-container').style.display = 'none';
+        });
+        // Evento para iniciar uma nova conversa e limpar o chat
+        document.getElementById("start-new-conversation-btn").addEventListener("click", function() {
+            document.querySelector(".chat-container").innerHTML = ""; // Limpa todas as mensagens
+            document.getElementById('info-container').style.display = 'block';
+        });
+        // Evento para limpar o chat ao clicar no botão de limpar
+        document.getElementById("clear-chat-btn").addEventListener("click", function() {
+            document.querySelector(".chat-container").innerHTML = ""; // Limpa todas as mensagens
+        });
+        document.getElementById("attach-file-btn").addEventListener("click", function() {
+            document.getElementById("file-input").click(); // Aciona o clique no input de arquivo
+        });
+        // Evento de entrada para o campo de pesquisa
+        document.querySelector('input[placeholder="Procurar"]').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase(); // Obtém o termo de pesquisa em minúsculas
+            const conversations = document.querySelectorAll('#conversations-list li'); // Seleciona todas as conversas
+
+            conversations.forEach(function(conversation) {
+                const buttonText = conversation.textContent.toLowerCase(); // Obtém o texto do botão em minúsculas
+                if (buttonText.includes(searchTerm)) {
+                    conversation.style.display = ''; // Mostra a conversa se o texto incluir o termo de pesquisa
+                } else {
+                    conversation.style.display = 'none'; // Esconde a conversa se não incluir o termo de pesquisa
+                }
+            });
         });
     </script>
 </body>
