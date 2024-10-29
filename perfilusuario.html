@@ -1,0 +1,60 @@
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Usuário</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="bg-black text-white font-sans flex items-center justify-center h-screen">
+    <div class="p-4 w-full max-w-lg">
+        <div class="flex items-center">
+            <button id="backButton" class="bg-gray-300 text-black rounded-full p-2">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+        </div>
+        <div class="flex justify-center mt-4">
+            <div class="flex items-center">
+                <i class="fas fa-user text-2xl"></i>
+                <h1 class="ml-2 text-2xl">Perfil do Usuário</h1>
+            </div>
+        </div>
+        <div class="bg-gray-400 rounded-lg p-6 mt-6 relative">
+            <div class="relative z-10">
+                <h2 class="text-xl font-bold mb-4">Informações Pessoais</h2>
+                <div class="mb-4">
+                    <label for="nome" class="block mb-2">Nome:</label>
+                    <input type="text" id="nome" class="bg-black text-white p-2 rounded w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block mb-2">Email:</label>
+                    <input type="email" id="email" class="bg-black text-white p-2 rounded w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="celular" class="block mb-2">Celular:</label>
+                    <input type="tel" id="celular" class="bg-black text-white p-2 rounded w-full">
+                </div>
+                <div class="mb-4">
+                    <label for="objetivo" class="block mb-2">Objetivo usando a plataforma:</label>
+                    <select id="objetivo" class="bg-black text-white p-2 rounded">
+                        <option>Utilizar no trabalho</option>
+                        <option>Estudos</option>
+                        <option>Apenas curiosidade sobre meio ambiente</option>
+                        <option>Escrever artigos ou contribuições</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-4 right-4 flex items-center">
+            <i class="fas fa-user text-3xl"></i>
+            <span class="ml-2 text-2xl">Meu Perfil</span>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('backButton').addEventListener('click', function() {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
