@@ -59,7 +59,6 @@
             <div class="flex items-center mb-6">
                 <i class="fas fa-tree text-2xl mr-2"></i>
                 <span class="text-xl font-semibold">Sr. Ambiente</span>
-                <i class="fas fa-ellipsis-h ml-auto"></i>
             </div>
             <button class="bg-green-600 text-white py-2 px-4 rounded flex items-center mb-6" id="start-new-conversation-btn">
                 <i class="fas fa-plus mr-2"></i> Iniciar uma nova Conversa
@@ -71,27 +70,27 @@
             <div class="mb-6">
                 <h2 class="text-gray-400 mb-2">Category</h2>
                 <ul>
-                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                    <a href="telaartigoestufa.html" class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
                         <span>Efeito Estufa</span>
                         <i class="fas fa-folder text-gray-400"></i>
-                    </li>
-                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                    </a>
+                    <a href="telaartigopoluicao.html" class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
                         <span>Poluição Ambiental</span>
                         <i class="fas fa-folder text-gray-400"></i>
-                    </li>
-                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                    </a>
+                    <a href="telaartigomudancas.html" class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
                         <span>Mudanças Climáticas</span>
                         <i class="fas fa-folder text-gray-400"></i>
-                    </li>
-                    <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
+                    </a>
+                    <a href="telaartigodesenvolvimento.html" class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
                         <span>Desenvolvimento Sustentável</span>
                         <i class="fas fa-folder text-gray-400"></i>
-                    </li>
+                    </a>
                 </ul>
             </div>
-            <div>
+            <div class="mb-6" id="last-conversations">
                 <h2 class="text-gray-400 mb-2">Últimas Conversas</h2>
-                <ul>
+                <ul id="conversations-list">
                     <li class="flex items-center justify-between py-2 px-4 bg-gray-800 rounded mb-2">
                         <button id="preserve-amazonia" class="text-left w-full bg-transparent text-gray-200 hover:bg-gray-700 rounded">
                             Quais os desafios para preservar a Amazônia?
@@ -111,8 +110,10 @@
             </div>
         </div>
         <div class="flex items-center">
-            <i class="fas fa-user-circle text-2xl mr-2"></i>
-            <span>Perfil do Usuário</span>
+            <button onclick="window.location.href='perfilusuario.html'" class="flex items-center bg-transparent border-none">
+                <i class="fas fa-user-circle text-2xl mr-2"></i>
+                <span>Perfil do Usuário</span>
+            </button>
             <button onclick="window.location.href='configuracoes.html'" class="ml-auto bg-transparent border-none">
                 <i class="fas fa-cog text-2xl"></i>
             </button>
@@ -159,7 +160,6 @@
                 <i class="fas fa-paperclip"></i>
             </button>
             <input type="text" id="chat-input" placeholder="Faça a sua pergunta aqui ..." class="w-full bg-gray-700 text-white py-2 px-4 rounded">
-            <i class="fas fa-microphone text-white text-2xl ml-4"></i>
             <i class="fas fa-paper-plane text-white text-2xl ml-4" id="send-btn"></i>
             <button id="clear-chat-btn" class="bg-red-500 text-white py-1 px-2 rounded text-sm ml-4">
                 Limpar Chat
@@ -272,6 +272,20 @@
         });
         document.getElementById("attach-file-btn").addEventListener("click", function() {
             document.getElementById("file-input").click(); // Aciona o clique no input de arquivo
+        });
+        // Evento de entrada para o campo de pesquisa
+        document.querySelector('input[placeholder="Procurar"]').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase(); // Obtém o termo de pesquisa em minúsculas
+            const conversations = document.querySelectorAll('#conversations-list li'); // Seleciona todas as conversas
+
+            conversations.forEach(function(conversation) {
+                const buttonText = conversation.textContent.toLowerCase(); // Obtém o texto do botão em minúsculas
+                if (buttonText.includes(searchTerm)) {
+                    conversation.style.display = ''; // Mostra a conversa se o texto incluir o termo de pesquisa
+                } else {
+                    conversation.style.display = 'none'; // Esconde a conversa se não incluir o termo de pesquisa
+                }
+            });
         });
     </script>
 </body>
